@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000;
 const cors = require('cors');
 
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'https://form-port.herokuapp.com/', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
@@ -24,7 +24,7 @@ app.use((req,res,next)=>{
 })
 
 app.get('/', (req,res)=>{
-    res.send(__dirname + '/index.html')
+    res.send(__dirname + '/#contact')
 })
 app.post('/', (req,res) => {
     console.log(req.body)
