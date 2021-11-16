@@ -12,9 +12,6 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(cors())
 
-app.get('/', (req,res)=>{
-    res.send(__dirname + '/index.html')
-})
 app.post('/', (req,res) => {
     console.log(req.body)
     const transporter = nodeMailer.createTransport({
@@ -36,7 +33,7 @@ app.post('/', (req,res) => {
             res.send('error')
         }else{
             console.log('Email Sent' + info.response);
-            res.send('E-mail send ')
+            res.send('E-mail send ');
         }
     })
 })
