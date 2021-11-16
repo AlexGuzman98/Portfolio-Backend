@@ -3,15 +3,17 @@ const app = express();
 const nodeMailer= require('nodemailer');
 const Mail = require('nodemailer/lib/mailer');
 const PORT = process.env.PORT || 5000;
+const cors = require('cors');
 
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
 
 //Middleware
 app.use(express.static('public'));
 app.use(express.json());
+app.use(cors())
 
 app.get('/', (req,res)=>{
-    res.send(__dirname + '/Portfolio/index.html')
+    res.send(__dirname + '/index.html')
 })
 app.post('/', (req,res) => {
     console.log(req.body)
