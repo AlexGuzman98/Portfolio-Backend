@@ -5,26 +5,15 @@ const Mail = require('nodemailer/lib/mailer');
 const PORT = process.env.PORT || 5000;
 const cors = require('cors');
 
-const corsOptions ={
-    origin:'https://form-port.herokuapp.com/', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
 
 //Middleware
 app.use(express.static('public'));
 app.use(express.json());
-app.use(cors(corsOptions));
-app.use((req,res,next)=>{
-    res.header('Acces-Control-Allow-Origin','*');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next(); 
-})
+app.use(cors())
 
 app.get('/', (req,res)=>{
-    res.send(__dirname + '/#contact')
+    res.send(__dirname + '/index.html')
 })
 app.post('/', (req,res) => {
     console.log(req.body)
