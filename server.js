@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(cors())
 
-app.post('/', (req,res) => {
+app.post('https://form-port.herokuapp.com/', (req,res) => {
     console.log(req.body)
     const transporter = nodeMailer.createTransport({
         service: 'gmail',
@@ -24,7 +24,7 @@ app.post('/', (req,res) => {
     const mailOptions = {
         from: req.body.email,
         to:  'daguzmanram@gmail.com',
-        subject: `Message from ${req.body.email}: ${req.body.message}`,
+        subject: `Message from ${req.body.email} -Company: ${req.body.company}`,
         text: req.body.message
     }
     transporter.sendMail(mailOptions,(error, info)=>{
