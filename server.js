@@ -12,12 +12,6 @@ const HOSTNAME = process.env.HOSTNAME || 'localhost';
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
-app.use(
-    cors({
-      origin: ["https://form-port.herokuapp.com/", "http://localhost:8080"],
-      credentials: true,
-    })
-  );
 
 app.post('/', (req,res) => {
     console.log(req.body)
