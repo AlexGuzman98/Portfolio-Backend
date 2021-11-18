@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const nodeMailer= require('nodemailer');
@@ -7,18 +8,24 @@ const cors = require('cors');
 
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
 
-//Middleware
+//app.use
 app.use(express.static('public'));
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+app.use(
+    cors({
+      origin: ["https://form-port.herokuapp.com/", "http://localhost:8080"],
+      credentials: true,
+    })
+  );
 
-app.post('https://form-port.herokuapp.com/', (req,res) => {
+app.post('/', (req,res) => {
     console.log(req.body)
     const transporter = nodeMailer.createTransport({
         service: 'gmail',
         auth:{
-            user: 'daguzmanram@gmail.com',
-            pass: '6Qm3SrbCEswJ'
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         }
     })
     const mailOptions = {
@@ -38,5 +45,5 @@ app.post('https://form-port.herokuapp.com/', (req,res) => {
     })
 })
 app.listen(PORT, HOSTNAME, ()=>{
-    console.log('Server is running...')
+    console.log(`Server is running on server ${PORT || HOSTNAME}...`)
 })
